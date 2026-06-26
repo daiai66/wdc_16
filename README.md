@@ -2,9 +2,9 @@
 
 按设备下载对应压缩包：
 
-- Windows：`simulator_16_light_win.zip`
-- macOS：`simulator_16_light_mac.zip`
-- 移动端：`simulator_16_mobile.zip`
+- Windows：`simulator_16_light_win`
+- macOS：`simulator_16_light_mac`
+- 移动端：`simulator_16_mobile`
 
 ## 使用方法
 
