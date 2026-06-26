@@ -261,13 +261,15 @@
     .achievement-card {
       position: relative;
       min-height: 360px;
-      padding: 18px;
+      padding: 18px 22px 54px;
       display: grid;
-      align-content: end;
+      align-content: center;
+      justify-items: center;
       gap: 10px;
+      text-align: center;
       color: #fff8df;
       background:
-        linear-gradient(180deg, rgba(255, 226, 121, 0.10), rgba(21, 15, 4, 0.90)),
+        linear-gradient(180deg, rgba(255, 226, 121, 0.06), rgba(21, 15, 4, 0.78) 52%, rgba(21, 15, 4, 0.94)),
         var(--achievement-image);
       background-size: cover;
       background-position: center;
@@ -291,10 +293,39 @@
       pointer-events: none;
       z-index: 0;
     }
+    .achievement-card::after {
+      content: "";
+      position: absolute;
+      inset: 18% 12% 26%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 244, 197, 0.30) 0%, rgba(255, 220, 120, 0.16) 38%, rgba(255, 220, 120, 0.05) 62%, transparent 100%);
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: 0;
+    }
     .achievement-card > * { position: relative; z-index: 1; }
+    .achievement-card.unlocked {
+      animation: achievementGlow 2.25s ease-in-out infinite;
+    }
+    @keyframes achievementGlow {
+      0%, 100% {
+        box-shadow:
+          0 0 0 1px rgba(255, 210, 84, 0.20) inset,
+          0 0 22px rgba(255, 209, 102, 0.24),
+          0 24px 54px rgba(0, 0, 0, 0.34);
+      }
+      50% {
+        box-shadow:
+          0 0 0 1px rgba(255, 235, 160, 0.42) inset,
+          0 0 32px rgba(255, 224, 130, 0.40),
+          0 0 56px rgba(255, 224, 130, 0.16),
+          0 24px 54px rgba(0, 0, 0, 0.34);
+      }
+    }
     .achievement-badge { width: fit-content; padding: 6px 10px; border-radius: 999px; background: rgba(255, 220, 120, 0.18); color: var(--yellow); font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .achievement-card h3 { margin: 0; font-size: 24px; line-height: 1.05; }
-    .achievement-card p { margin: 0; color: #fff2c5; font-size: 13px; line-height: 1.6; }
+    .achievement-card h3 { margin: 0; max-width: 180px; font-size: 24px; line-height: 1.05; text-wrap: balance; }
+    .achievement-card p { margin: 0; max-width: 180px; color: #fff2c5; font-size: 13px; line-height: 1.6; text-wrap: pretty; }
     footer { position: fixed; right: 18px; bottom: 14px; max-width: min(560px, calc(100% - 36px)); color: rgba(255, 255, 255, 0.44); font-size: 11px; text-align: right; }
 
     @media (max-width: 880px) {
@@ -1072,7 +1103,7 @@
         map: "monza",
         events: [
           {
-            title: "事件 1：冲刺赛的一号弯",
+            title: "冲刺赛的一号弯",
             text: "冲刺赛发车后，VER 在一号弯前已经摆出切入内线的姿态。蒙扎第一套减速弯决定你能不能把主动权留到下午。你准备怎么摆车。",
             image: "url('assets/monza-restart-2021.jpg')",
             map: "monza",
@@ -1117,7 +1148,7 @@
             ]
           },
           {
-            title: "事件 2：正赛轮胎管理",
+            title: "正赛轮胎管理",
             text: "正赛进入决定阶段，前方两台迈凯伦正在 1 位互相缠斗。你的速度足够触碰领奖台甚至更高，但一切都建立在轮胎还能不能撑住这个窗口上。",
             image: "url('assets/monza-lead-2024.webp')",
             map: "monzaRace",
@@ -1137,12 +1168,12 @@
                 label: "连续刷紫，对木瓜发起进攻",
                 hint: "把轮胎当排位圈来用，尝试在还没掉节奏前直接杀进前二。",
                 title: "连续进攻后的大锁死",
-                text: "你连续两圈把能量和轮胎全部推满，终于靠近了前车，可第三次重刹时前轴直接越过极限。锁死让你冲出缓冲区，也把领奖台窗口一起锁没了，最终第 4 完赛。",
+                text: "第三次重刹时前轴直接越过极限。锁死让你冲出缓冲区，最终第 4 完赛。后方加斯利渔翁得利，获得了本场冠军",
                 radio: "Leclerc：I locked up, I locked up. 车队：Copy. Reset and bring home P4.",
                 finish: "P4",
                 score: 12,
                 image: "url('assets/monza-win-2019.webp')",
-                points: { Piastri: 25, Norris: 18, Hamilton: 15, Leclerc: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+                points: { Hamilton: 25, Piastri: 18, Norris: 15, Leclerc: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
               },
               {
                 label: "紧随其后，持续对木瓜兄弟施压",
@@ -1233,12 +1264,12 @@
                 label: "外线顶住，不让 RUS 完成并排",
                 hint: "坚持用赛道位置压住对手，赌自己能在外线把车停住。",
                 title: "1 号弯被顶到 spin，直接退赛",
-                text: "你在外线也不肯收这一脚，RUS 同样没有打算让出弯心。两台车在 1 号弯下半段挤到一起，右后轮被碰之后赛车瞬间甩尾，你只能眼看着整场比赛在上坡缓冲区里转成一圈烟。奥斯丁周末就这样提前结束。",
+                text: "你在外线也不肯收这一脚，RUS 同样没有打算让出弯心。两台车在 1 号弯下半段挤到一起，右后轮被碰之后赛车瞬间甩尾，你只能眼看着整场比赛在上坡缓冲区里转成一圈烟。你退赛之后，维斯塔潘接管节奏并一路把冠军带走，红牛也重新看到年度争冠的入口。",
                 radio: "Leclerc：He hit me, I'm spinning. 车队：Copy, stop the car if there is damage.",
                 finish: "DNF",
                 score: 0,
                 image: "url('assets/usa-event-2024.webp')",
-                points: { Norris: 25, Piastri: 18, Verstappen: 15, Russell: 12, Hamilton: 10, Antonelli: 8, Hadjar: 6, Leclerc: 0 }
+                points: { Verstappen: 25, Norris: 6, Piastri: 12, Russell: 10, Hamilton: 8, Antonelli: 6, Hadjar: 4, Leclerc: 0 }
               },
               {
                 label: "收一点车头，保前胎去 S 弯再压回去",
@@ -1249,7 +1280,7 @@
                 finish: "P3",
                 score: 15,
                 image: "url('assets/usa-p3-2022.webp')",
-                points: { Norris: 25, Verstappen: 18, Leclerc: 15, Piastri: 12, Russell: 10, Hamilton: 8, Antonelli: 6, Hadjar: 4 }
+                points: { Norris: 6, Verstappen: 18, Leclerc: 15, Piastri: 12, Russell: 10, Hamilton: 8, Antonelli: 6, Hadjar: 4 }
               }
             ]
           },
@@ -1268,7 +1299,7 @@
                 finish: "P2",
                 score: 18,
                 image: "url('https://cdn-4.motorsport.com/images/amp/6O1GZkO2/s6/charles-leclerc-ferrari.jpg')",
-                points: { Norris: 25, Leclerc: 18, Piastri: 15, Verstappen: 12, Hamilton: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+                points: { Norris: 6, Leclerc: 18, Piastri: 15, Verstappen: 12, Hamilton: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
               },
               {
                 label: "继续管理前胎，保守换回安全积分",
@@ -1279,7 +1310,7 @@
                 finish: "P3",
                 score: 15,
                 image: "url('https://sportsbase.io/images/gpfans/copy_1200x800/94bb813b93a9d55379e43bc0ff6989bec63251d6.jpg')",
-                points: { Norris: 25, Verstappen: 18, Leclerc: 15, Piastri: 12, Russell: 10, Hamilton: 8, Antonelli: 6, Hadjar: 4 }
+                points: { Norris: 6, Verstappen: 18, Leclerc: 15, Piastri: 12, Russell: 10, Hamilton: 8, Antonelli: 6, Hadjar: 4 }
               },
               {
                 label: "延后一圈进站，出站后直接全力进攻",
@@ -1310,12 +1341,12 @@
             label: "换半雨胎",
             hint: "优先应对继续加大的雨势，接受如果很快红旗会亏掉赛道位置的风险。",
             title: "判断对了天气，输给了红旗时机",
-            text: "你率先换上半雨胎，刚出站两圈赛会就因为积水和事故出示红旗。等比赛重新开始时，大家都能免费切到更合适的配方，而你那次提前进站白白丢掉了大量赛道位置。你最后只能把损失控制在第 6，比赛时无线电里那句小作文还是憋不住地冒了出来。",
+            text: "你率先换上半雨胎，刚出站两圈赛会就因为积水和事故出示红旗。等比赛重新开始时，大家都能免费切到更合适的配方，而你那次提前进站白白丢掉了大量赛道位置。你最后只能把损失控制在第 6，而另一边维斯塔潘在重新起跑后直接接管比赛，把胜利和争冠主动权一起带走。",
             radio: "Leclerc：This is so frustrating. We've lost all the competitiveness. You should just have listened to me i would have found a different way to manage those issues. Now it's just undriveable. It's a miracle to finish on the podium. 车队：Understood, Charles.",
             finish: "P6",
             score: 8,
             image: "url('assets/brazil-tyre-radio-2022.jpg')",
-            points: { Norris: 25, Piastri: 18, Verstappen: 15, Hamilton: 12, Russell: 10, Leclerc: 8, Antonelli: 6, Hadjar: 4 }
+            points: { Verstappen: 25, Norris: 6, Piastri: 12, Hamilton: 10, Russell: 8, Leclerc: 8, Antonelli: 6, Hadjar: 4 }
           },
           {
             label: "换中性胎",
@@ -1326,18 +1357,18 @@
             finish: "P4",
             score: 12,
             image: "url('assets/brazil-cover-car-2023.webp')",
-            points: { Norris: 18, Verstappen: 15, Piastri: 12, Leclerc: 12, Hamilton: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+            points: { Norris: 6, Verstappen: 15, Piastri: 12, Leclerc: 12, Hamilton: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
           },
           {
             label: "换软胎",
             hint: "赌赛道还能再撑几圈干地节奏，用最快单圈速度先把位置咬回来。",
             title: "重演 2019：法拉利直道双退",
-            text: "你想趁别人犹豫时用软胎直接刷穿前方车流，结果车队内部距离管理一起崩了。主直道上两台红车都不肯收这一脚，轮对轮接触后双双爆胎停在路边，英特拉格斯又一次把法拉利的内耗变成了全场最响的一声叹气。",
+            text: "你想趁别人犹豫时用软胎直接刷穿前方车流，结果车队内部距离管理一起崩了。主直道上两台红车都不肯收这一脚，轮对轮接触后双双爆胎停在路边，英特拉格斯又一次把法拉利的内耗变成了全场最响的一声叹气。混乱里维斯塔潘一路躲开事故、收下冠军，年度积分榜也被重新点燃。",
             radio: "车队：Both Ferraris are out. Leclerc：I don't know what he is doing.",
             finish: "DNF",
             score: 0,
             image: "url('assets/brazil-crash-2019.jpg')",
-            points: { Norris: 25, Verstappen: 18, Piastri: 15, Hamilton: 12, Russell: 10, Antonelli: 8, Hadjar: 6, Leclerc: 0 }
+            points: { Verstappen: 25, Norris: 6, Piastri: 12, Hamilton: 10, Russell: 8, Antonelli: 6, Hadjar: 4, Leclerc: 0 }
           }
         ]
       },
@@ -1360,7 +1391,7 @@
             finish: "P2",
             score: 18,
             image: "url('assets/abu-dhabi-cover-2022.jpg')",
-            points: { Norris: 25, Leclerc: 18, Hamilton: 15, Piastri: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+            points: { Norris: 6, Leclerc: 18, Hamilton: 15, Piastri: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
           },
           {
             label: "中性胎提前 undercut，把超车压力前置",
@@ -1371,18 +1402,18 @@
             finish: "P4",
             score: 12,
             image: "url('assets/abu-dhabi-pass-2023.jpg')",
-            points: { Norris: 25, Hamilton: 18, Piastri: 15, Leclerc: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+            points: { Hamilton: 25, Norris: 6, Piastri: 15, Leclerc: 12, Verstappen: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
           },
           {
             label: "激进追分，优先帮车队算 WCC 可能性",
             hint: "把自己的轮胎和节奏都压到更危险的位置，随时准备为了积分差做非常规选择。",
             title: "只有你还在想着 WCC，结果掉到第 5",
-            text: "你不停追问前车差距和积分换算，希望每一圈都能替车队把 WCC 的可能性往回拽一点。可车队在节奏和目标之间来回摇摆，既没有给你最果断的策略，也没有把轮胎留到真正该发力的时刻。",
+            text: "你不停追问前车差距和积分换算，希望每一圈都能替车队把 WCC 的可能性往回拽一点。可车队在节奏和目标之间来回摇摆，既没有给你最果断的策略，也没有把轮胎留到真正该发力的时刻。另一边维斯塔潘则把节奏、进站和清洁空气全部吃满，在收官夜抢下关键胜利；诺里斯则在后程被连续压制，维斯塔潘把 WDC 直接拖进自己手里。",
             radio: "Leclerc：I feel like I am the only one caring whether we get WCC. 车队：Understood, Charles. We just bring it home.",
             finish: "P5",
             score: 10,
             image: "url('assets/abu-dhabi-gutted-2023.jpg')",
-            points: { Norris: 25, Piastri: 18, Hamilton: 15, Verstappen: 12, Leclerc: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
+            points: { Verstappen: 25, Piastri: 15, Hamilton: 12, Norris: 6, Leclerc: 10, Russell: 8, Antonelli: 6, Hadjar: 4 }
           }
         ]
       }
@@ -1826,12 +1857,15 @@
     function unlockedAchievements() {
       const totals = totalPointsUpToCurrentRace();
       const british = finalChoiceForRace(4);
+      const spa = finalChoiceForRace(5);
+      const monza = finalChoiceForRace(7);
       const baku = finalChoiceForRace(8);
       const brazil = finalChoiceForRace(10);
       const abuDhabi = finalChoiceForRace(11);
       const allChoices = races.flatMap((_, index) => getSavedRaceChoices(index));
       const constructors = constructorsTotals(totals);
       const bestConstructor = Object.entries(constructors).sort((a, b) => b[1] - a[1])[0]?.[0];
+      const championCode = buildStandingsRows(totals)[0]?.[0];
 
       return [
         {
@@ -1875,6 +1909,41 @@
           blurb: "整个赛季零 DNF",
           image: "https://cdn-7.motorsport.com/images/amp/0L1Nvg92/s6/charles-leclerc-ferrari-3.jpg",
           unlocked: allChoices.every((choice) => choice.finish !== "DNF")
+        },
+        {
+          id: "gaslymaster",
+          name: "加大师",
+          blurb: "人生如大戏，主演加斯利。",
+          image: "https://cdn-5.motorsport.com/images/amp/YXRGwd70/s6/pierre-gasly-alphatauri-at01-s.jpg",
+          unlocked: monza?.label === "连续刷紫，对木瓜发起进攻"
+        },
+        {
+          id: "fatherpower",
+          name: "父爱力量",
+          blurb: "斯特罗尔和斯帕都姓斯。",
+          image: "assets/spa-cover.webp",
+          unlocked: spa?.label === "全力推进，拉开 DRS 窗口"
+        },
+        {
+          id: "autobot",
+          name: "汽车人",
+          blurb: "DUDUDUDU",
+          image: "assets/austria-cover.webp",
+          unlocked: championCode === "Verstappen"
+        },
+        {
+          id: "ln1",
+          name: "LN1",
+          blurb: "Lando we can be world champion I said.",
+          image: "assets/baku-battle.webp",
+          unlocked: championCode === "Norris"
+        },
+        {
+          id: "hamwc",
+          name: "拔罐王",
+          blurb: "Get in there Lewis.",
+          image: "assets/final-leclerc-ferrari-suits.webp",
+          unlocked: championCode === "Hamilton"
         }
       ].filter((achievement) => achievement.unlocked);
     }
@@ -1933,7 +2002,7 @@
         : "";
       document.getElementById("achievement-grid").innerHTML = unlocked.length
         ? unlocked.map((achievement) => `
-          <article class="achievement-card" style="--achievement-image:url('${achievement.image}')">
+          <article class="achievement-card unlocked" style="--achievement-image:url('${achievement.image}')">
             <span class="achievement-badge">Unlocked</span>
             <h3>${achievement.name}</h3>
             <p>${achievement.blurb}</p>

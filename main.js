@@ -1,15 +1,18 @@
-const { app, BrowserWindow, Menu, shell } = require("electron");
+﻿const { app, BrowserWindow, Menu, shell } = require("electron");
 const fs = require("fs");
 const path = require("path");
 
 function findGameHtml() {
-  const exact = path.join(__dirname, "simulator_16.html");
-  if (fs.existsSync(exact)) return exact;
+  const preferred = ["simulator_16_light.html", "simulator_16.html"];
+  for (const filename of preferred) {
+    const exact = path.join(__dirname, filename);
+    if (fs.existsSync(exact)) return exact;
+  }
   const fallback = fs.readdirSync(__dirname).find((name) =>
     name.endsWith(".html") &&
     name.includes("simulator_16")
   );
-  if (!fallback) throw new Error("Cannot find simulator_16.html");
+  if (!fallback) throw new Error("Cannot find simulator_16 html file");
   return path.join(__dirname, fallback);
 }
 
@@ -47,3 +50,4 @@ app.whenReady().then(() => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+
