@@ -1,0 +1,16 @@
+node_modules/
+desktop-app/node_modules/
+dist/
+desktop-app/dist/
+light-share/
+*.zip
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Local backups / temp files
+*_backup*.html
+*_1.html
+m[[]0]))]
+m[[]0]))].slice(0

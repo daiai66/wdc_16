@@ -1,0 +1,19 @@
+{
+  "name": "simulator_16",
+  "version": "1.0.0",
+  "description": "simulator_16 desktop app",
+  "main": "main.js",
+  "author": "OpenAI Codex",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "node pack.js win x64",
+    "build:mac": "node pack.js mac arm64",
+    "build:mac:x64": "node pack.js mac x64",
+    "build": "node pack.js win x64"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-packager": "^17.1.2"
+  }
+}
